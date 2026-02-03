@@ -6,14 +6,18 @@
  */
 
 export function pluck<T, K extends keyof T>(obj: T, key: K): T[K] {
-  // TODO
   return obj[key];
 }
 
 export function hasId<T extends { id: string }>(x: T): string {
-  // TODO
   return x.id;
 }
 
+const a: [number, string] = [1, "x"];
+
+console.log(pluck( { a: 1, b: "x" } , "b"));
+
 console.log(pluck({ a: 1, b: "x" }, "b") === "x");
+console.log(hasId({ id: "p1", title: "Test" }));
+// console.log(hasId({ title: "Test" }));
 console.log(hasId({ id: "p1", title: "Test" }) === "p1");

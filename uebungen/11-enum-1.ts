@@ -18,13 +18,28 @@ export enum OrderStatus {
 }
 
 export function canShip(status: OrderStatus): boolean {
-  // TODO
-  return false;
+  return (status === OrderStatus.Paid) ? true : false;
 }
 
 export function nextStatus(status: OrderStatus): OrderStatus {
-  // TODO
+  status = ( status === OrderStatus.Draft ) 
+    ? OrderStatus.Paid 
+    : ( canShip(status) )
+        ? OrderStatus.Shipped
+        : status;
   return status;
+
+  // alternativ:
+  /* 
+  switch (status) {
+    case OrderStatus.Draft:
+      return OrderStatus.Paid;
+    case OrderStatus.Paid:
+      return OrderStatus.Shipped;
+    default:
+      return status;
+  }
+  */
 }
 
 console.log(canShip(OrderStatus.Paid) === true);

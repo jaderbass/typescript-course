@@ -7,15 +7,28 @@
  *    - sonst -> "invalid"
  */
 
+// 10-type-guards-1.solution.ts
+
 export function isStringArray(value: unknown): value is string[] {
-  // TODO
-  return false;
+  if (!Array.isArray(value)) {
+    return false;
+  }
+
+  for (const item of value) {
+    if (typeof item !== "string") {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 export function joinIfStrings(value: unknown): string {
-  // TODO
-  return "invalid";
+  return isStringArray(value) ? value.join(",") : "invalid";
 }
+
+console.log(isStringArray([5]));
+
 
 console.log(joinIfStrings(["a", "b"]) === "a,b");
 console.log(joinIfStrings([1, 2]) === "invalid");
